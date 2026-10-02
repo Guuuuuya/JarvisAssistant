@@ -8,3 +8,7 @@ credentials.json
 token.json
 key.pem
 cert.pem
+
+android/app/build/
+android/.gradle/
+android/build/
