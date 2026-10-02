@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>J.A.R.V.I.S.</title>
+    <style>
+      body { margin: 0; background: #04070f; color: #9fd8ff; font-family: monospace; overflow: hidden; }
+      #ui { position: absolute; bottom: 24px; left: 0; right: 0; text-align: center; }
+      #status { min-height: 20px; margin-bottom: 12px; }
+      button { background: #0a2a4a; color: #9fd8ff; border: 1px solid #2a6aa0; padding: 10px 22px; cursor: pointer; font-family: monospace; }
+      button:hover { background: #123e6b; }
+      #log { position: absolute; top: 16px; left: 16px; right: 16px; max-height: 30vh; overflow-y: auto; font-size: 14px; }
+      #term { position: fixed; bottom: 90px; right: 16px; width: 420px; max-height: 220px; overflow-y: auto; background: rgba(0,0,0,0.75); border: 1px solid #2a6aa0; color: #6fff9f; font-size: 12px; padding: 8px; white-space: pre-wrap; pointer-events: auto; }
+    </style>
+  </head>
+  <body>
+    <div id="log"></div>
+    <pre id="term"></pre>
+    <div id="ui">
+      <div id="status">Click the button and speak.</div>
+      <button id="mic">🎤 Talk to JARVIS</button>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

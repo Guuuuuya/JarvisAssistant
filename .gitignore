@@ -1,0 +1,8 @@
+.env
+*.db
+__pycache__/
+node_modules/
+dist/
+*_api_key.txt
+credentials.json
+token.json
