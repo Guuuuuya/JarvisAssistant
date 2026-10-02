@@ -1,0 +1,19 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.jarvis.app-mergeDebugResources-18:/values-ldltr-v21/values-ldltr-v21.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\cauam\\.gradle\\caches\\9.6.0\\transforms\\6ac2a2eb002628481418876cfd145b82\\transformed\\appcompat-1.6.1\\res\\values-ldltr-v21\\values-ldltr-v21.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "112",
+                        "endOffsets": "163"
+                    }
+                }
+            ]
+        }
+    ]
+}

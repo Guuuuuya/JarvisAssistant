@@ -6,3 +6,5 @@ dist/
 *_api_key.txt
 credentials.json
 token.json
+key.pem
+cert.pem

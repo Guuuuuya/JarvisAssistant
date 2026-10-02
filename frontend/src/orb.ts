@@ -11,7 +11,7 @@ export class Orb {
   constructor() {
     this.renderer.setSize(innerWidth, innerHeight);
     document.body.appendChild(this.renderer.domElement);
-    this.camera.position.z = 3;
+    this.camera.position.z = innerWidth < 700 ? 4.2 : 3;
 
     const geo = new THREE.IcosahedronGeometry(1, 24);
     this.basePositions = geo.attributes.position.array.slice() as Float32Array;

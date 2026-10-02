@@ -9,7 +9,7 @@ const term = document.getElementById("term")!;
 let ws: WebSocket | null = null;
 
 function connect() {
-  ws = new WebSocket(`ws://${location.hostname}:8000/ws`);
+  ws = new WebSocket(`${location.protocol === "https:" ? "wss" : "ws"}://${location.host}/ws`);
   ws.binaryType = "arraybuffer";
   ws.onmessage = async (ev) => {
     if (typeof ev.data === "string") {
@@ -57,34 +57,14 @@ if (!Recognition) {
 } else {
   const rec = new Recognition();
   rec.lang = "en-US";
-  rec.continuous = true;
   rec.onresult = (ev: any) => {
-    for (let i = ev.resultIndex; i < ev.results.length; i++) {
-      if (!ev.results[i].isFinal) continue;
-      const text = ev.results[i][0].transcript.trim();
-      const m = text.match(/jarvis[,.\s]+(.+)/i);
-      if (!m) {
-        term.textContent += `(ignored, no wake word: "${text}")\n`;
-        term.scrollTop = term.scrollHeight;
-        continue;
-      }
-      const cmd = m[1].trim();
-      log.innerHTML += `<div><b>You:</b> ${cmd}</div>`;
-      status.textContent = "JARVIS is thinking...";
-      ws?.send(JSON.stringify({ text: cmd }));
-    }
+    const text = ev.results[0][0].transcript.trim();
+    log.innerHTML += `<div><b>You:</b> ${text}</div>`;
+    status.textContent = "JARVIS is thinking...";
+    ws?.send(JSON.stringify({ text }));
   };
-  rec.onend = () => { if (listening) rec.start(); };
-  let listening = false;
   micBtn.onclick = () => {
-    listening = !listening;
-    if (listening) {
-      status.textContent = 'Always listening — say "Jarvis, ..."';
-      micBtn.textContent = "🔴 Stop listening";
-      rec.start();
-    } else {
-      status.textContent = "Stopped.";
-      micBtn.textContent = "🎤 Talk to JARVIS";
-    }
+    status.textContent = "Listening...";
+    rec.start();
   };
 }
