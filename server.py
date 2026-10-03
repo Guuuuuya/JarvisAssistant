@@ -51,19 +51,18 @@ async def ask_llm(user_text: str) -> str:
     prompt = f"{SYSTEM_PROMPT}\n\nKnown facts about the user:\n{mem_block}\n\nUser: {user_text}\nJARVIS:"
 
     if GEMINI_KEY:
-        url = f"https://generativelanguage.googleapis.com/v1beta/models/{MODEL}:generateContent?key={GEMINI_KEY}"
-        payload = {"contents": [{"parts": [{"text": prompt}]}]}
-        try:
-            async with httpx.AsyncClient(timeout=60) as client:
-                for attempt in range(2):
+        for model in [MODEL, "gemini-3.1-flash-lite"]:
+            url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={GEMINI_KEY}"
+            payload = {"contents": [{"parts": [{"text": prompt}]}]}
+            try:
+                async with httpx.AsyncClient(timeout=60) as client:
                     r = await client.post(url, json=payload)
                     if r.status_code == 200:
                         return r.json()["candidates"][0]["content"]["parts"][0]["text"].strip()
-                    await asyncio.sleep(2)
-                LAST = {"level": "warn", "msg": f"Gemini returned HTTP {r.status_code} — using backup brain (OpenRouter)."}
-        except Exception as e:
-            print("Gemini failed:", e)
-            LAST = {"level": "warn", "msg": "Gemini failed — using backup brain (OpenRouter)."}
+                    print(f"Gemini {model} HTTP {r.status_code}")
+            except Exception as e:
+                print("Gemini failed:", e)
+        LAST = {"level": "warn", "msg": "Gemini failed — using OpenRouter backup."}
 
     if OR_KEY:
         url = "https://openrouter.ai/api/v1/chat/completions"
