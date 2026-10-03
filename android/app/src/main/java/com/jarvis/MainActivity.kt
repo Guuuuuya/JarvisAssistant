@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
                 request?.grant(request.resources)
             }
         })
-        web.loadUrl("https://thumbzilla-announce-mom-replacement.trycloudflare.com")
+        web.loadUrl("https://jarvis-caua.loca.lt")
         setContentView(web)
     }
 }
