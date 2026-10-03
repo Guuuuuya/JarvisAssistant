@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
                 request?.grant(request.resources)
             }
         })
-        web.loadUrl("https://walt-glory-thinking-gabriel.trycloudflare.com")
+        web.loadUrl("https://thumbzilla-announce-mom-replacement.trycloudflare.com")
         setContentView(web)
     }
 }
